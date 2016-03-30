@@ -1,0 +1,87 @@
+[
+  {
+    "time": 29.15,
+    "title": "3-Second Pause",
+    "body": "There is about 3 seconds pause in conversation.<br><br> Is this a good time for <strong><u>Jason and Kyle</u></strong> to receive a push notification?"
+  },
+  {
+    "time": 48.00,
+    "title": "Kyle using his smartphone",
+    "body": "Kyle is sending a message to Charlie.<br><br> Is this a good time for <strong><u>Jason</u></strong> to check his smartphone?"
+  },
+  {
+    "time": 49.20,
+    "title": "Kyle using his smartphone",
+    "body": "How about Kyle? Is this a good time for <strong><u>Kyle</u></strong> to receive a push notification?"
+  },
+  {
+    "time": 63.12,
+    "title": "Jason calling a waiter",
+    "body": "<strong><u>Jason and Kyle</u></strong> are waiting for a waiter to come.<br><br> Is this a good time for <strong><u>them</u></strong> to receive a push notification?"
+  },
+  {
+    "time": 72.10,
+    "title": "Jason ordering food",
+    "body": "Jason is ordering food.<br><br> Is this a good time for <strong><u>Kyle</u></strong> to check his smartphone?"
+  },
+  {
+    "time": 87.10,
+    "title": "Jason going to bathroom",
+    "body": "Jason is standing up to go to bathroom.<br><br> Is this a good time for <strong><u>Jason</u></strong> to receive a push notification?"
+  },
+  {
+    "time": 92.20,
+    "title": "Kyle waiting",
+    "body": "Kyle is waiting for Jason and Charlie.<br><br> Is this a good time for <strong><u>Kyle</u></strong> to check his smartphone?"
+  },
+  {
+    "time": 100.00,
+    "title": "Kyle using smartphone",
+    "body": "Kyle is using smartphone while waiting for Jason and Charlie.<br><br> Is this a good time for <strong><u>Kyle</u></strong> to receive a push notification?"
+  },
+  {
+    "time": 119.00,
+    "title": "Waiter bringing pizzas",
+    "body": "Waiter is bringing pizzas.<br><br> Is this a good time for <strong><u>Jason and Kyle</u></strong> to check their smartphones?"
+  },
+  {
+    "time": 130.00,
+    "title": "Eating",
+    "body": "All of them are having pizzas.<br><br> Not much of conversation is going on. Is this a good time for <strong><u>them</u></strong> to check their smartphones?"
+  },
+  {
+    "time": 146.00,
+    "title": "Jason using smartphone",
+    "body": "Jason is using smartphone.<br><br> Is this a good time for Jason to receive a push notification?"
+  },
+  {
+    "time": 147.00,
+    "title": "Jason using smartphone",
+    "body": "Jason is using smartphone. There is about 1 second silence.<br><br> Is this a good time for <strong><u>Charlie and Kyle</u></strong> to check their smartphones?"
+  },
+  {
+    "time": 156.00,
+    "title": "1-Second Pause",
+    "body": "There is about 1 second pause.<br><br> Is this a good time for <strong><u>them</u></strong> to use a smartphone?"
+  },
+  {
+    "time": 183.00,
+    "title": "Kyle and Charlie using smartphone",
+    "body": "Kyle and Charlie are using smartphone.<br><br> Is this a good time for <strong><u>Jason</u></strong> to use his smartphone?"
+  },
+  {
+    "time": 198.10,
+    "title": "Waiter bringing the bill",
+    "body": "Waiter is bringing the bill.<br><br> Is this a good time for <strong><u>them</u></strong> to check their smartphones?"
+  },
+  {
+    "time": 210.00,
+    "title": "5-Second Pause",
+    "body": "There is about 5 seconds pause.<br><br> Is this a good time for <strong><u>them</u></strong> to check their smartphones?"
+  },
+  {
+    "time": 214.10,
+    "title": "Everyone standing up",
+    "body": "Everyone is leaving the table.<br><br> Is this a good time for <strong><u>them</u></strong> to check their smartphones?"
+  }
+]

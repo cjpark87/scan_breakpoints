@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SCAN Notification Test</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/agency.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <script src="js/uuid.js"></script>
+    <script src="js/underscore-min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+        var uuid = uuid.v1();
+        var video;
+        var breakpoints;
+
+        $(window).bind('load', function() {
+            video = $('#video').get(0);
+
+            $('#start').click(function () {
+                $('body').animate({
+                    scrollTop: $("#experiment").offset().top
+                }, 800, function () {
+                    window.location.hash = 'experiment';
+                    video.play();
+                });
+            });
+
+            video.onplay = function () {
+                video.removeAttribute("controls");
+            }
+
+            video.onended = function () {
+                video.setAttribute("controls","controls")
+            }
+
+            video.ontimeupdate = function () {
+                if (_.isEmpty(breakpoints)) {
+                    return;
+                }
+
+                if (breakpoints[0].time <= video.currentTime) {
+                    video.pause();
+                    video.webkitExitFullScreen();
+
+                    $('#modal-title').text(breakpoints[0].title);
+                    $('#modal-body').html(breakpoints[0].body);
+
+                    $('#question').modal('show');
+
+                }
+            };
+
+            $('#modal-yes').click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "http://143.248.56.9:3500/scan/breakpoints",
+                    contentType: "application/json",
+                    data: JSON.stringify({"time": breakpoints[0].time, "response": true, "date": Date.now(), "uuid": uuid})
+                });
+
+                breakpoints = _.rest(breakpoints);
+                video.play();
+            });
+
+            $('#modal-no').click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "http://143.248.56.9:3500/scan/breakpoints",
+                    contentType: "application/json",
+                    data: JSON.stringify({"time": breakpoints[0].time, "response": false, "date": Date.now(), "uuid": uuid})
+                });
+
+                breakpoints = _.rest(breakpoints);
+                video.play();
+            });
+
+            $.ajax({ url: './json/data.json',
+                    success: function (data) {
+                        breakpoints = data;
+                    },
+                    error: function () {
+                        location.reload();
+                    },
+            });
+        });
+    </script>
+</head>
+
+<body id="page-top" class="index">
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!--a href="http://cs.kaist.ac.kr" target="_blank" ><img class="navbar-brand" src="./img/kaist_soc_logo_white.png"/></a-->
+                <a class="navbar-brand page-scroll" href="#page-top">Appropriate Time for Push Notification</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <section id="about" class="bg-light-gray" style="padding:20px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="section-heading">Approprite Time for Push Notifications</h3>
+                    <h3 class="section-subheading text-muted" style="margin-bottom:0px">
+                        The purpose of this research project is to understand how smartphone push notifications affect interactions in a restaurant and to identify an approprite time for receiving push notifications. This experiment will take approximately 5 minutes that will require you to answer 19 questions while watching a video.<br><br>
+
+                        All of the questions are yes/no questions asking <strong><u>appropriteness of receiving push notifications in various situations.</u></strong> The questions are popped up as the video below is played.<br><br>
+
+                        Your responses to this experiment will be confidential and they will be used for research purposes only. Results will be published only as aggregate statistics, allowing no inference on any particular individual. The participation is voluntary and you may withdraw from the study at any time with no penalty. To withdraw, simply close your browser.<br><br>
+
+                        If you have any questions or would like additional information about this research, please contact:<br>
+                        <strong>Chunjong Park</strong><br>
+                        School of Computing, KAIST<br>
+                        <a href="mailto:cjpark@nmsl.kaist.ac.kr">cjpark@nmsl.kaist.ac.kr</a><br><br>
+
+                        The KAIST Institutional Review Board has approved this project. You may also contact KAIST IRB at irb@kaist.ac.kr with any questions.<br><br>
+
+                        Please click the Start button to begin the experiment. <strong>Please <u>do not skip/fastforward</u> until the experiment finishes.</strong><br><br>
+                    <div class="col-sm-4">
+                    </div>
+                    <div class="col-lg-4">
+                        <button id="start" type="button" class="btn btn-primary btn-lg btn-block">Start</button>
+                    </div>
+                    <div class="col-sm-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experiment" style="padding-top:100px; padding-bottm:100px; padding-left:10px; padding-right:10px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <video id="video" preload="auto" controls>
+                        <source src="video/breakpoints.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="question" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!--button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button-->
+                    <h4 id="modal-title" class="modal-title"></h4>
+                </div>
+                <div id="modal-body" class="modal-body">
+                    <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button id="modal-yes" type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>
+                    <button id="modal-no" type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <footer class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <span class="copyright">Copyright &copy; 2016 Chunjong Park</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="js/classie.js"></script>
+    <script src="js/cbpAnimatedHeader.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/agency.js"></script>
+
+</body>
+
+</html>
